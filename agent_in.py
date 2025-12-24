@@ -1,6 +1,5 @@
 from openai import OpenAI
 from prompt import react_system_prompt_template
-from out_1 import cut_word
 from get import pos_get
 
 
@@ -12,7 +11,7 @@ class SimpleAPIAgent:
         # 使用你的API密钥直接初始化客户端
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
-            api_key='输入密钥'
+            api_key='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'
         )
 
     def chat(self, user_input: str) -> str:
@@ -31,6 +30,11 @@ class SimpleAPIAgent:
         return response.choices[0].message.content
 
 
+    # 写入文件
+    def write(self, adree, word):
+        with open(adree, 'w', encoding='utf-8') as file:
+            file.write(word)
+        print(f"文件已写入：{adree}")
 
 
 
@@ -38,42 +42,36 @@ def main():
     # 创建AI助手实例
     assistant = SimpleAPIAgent()
 
-    print("🤖 AI助手已启动! 输入'退出'结束对话")
+    print("姿态检测已开启")
 
     while True:
-
-        # 获取用户输入
-        user_input = input("\n请输入0进入坐姿时间戳获取,输入1进入ai姿态分析")
-        #姿态获取
-        if user_input == '0':
-            pos_get('test.mp4')
-            print("已获得坐姿时间戳")
+        #获取坐姿时间戳
+        print("获取坐姿时间戳")
+        pos_get('test.mp4')
+        print("已获得坐姿时间戳")
 
         #姿态分析
-        elif user_input == '1':
-            txt_input = open('D:/programm/Jupyter/DL/output.txt', 'r', encoding='utf-8').read()
-            print("读取到的文本内容为:", txt_input)
-            try:
-                reply = assistant.chat(txt_input)
-                print(f"AI: {reply}")
-                #写入txt
-                adree = 'D:/programm/Jupyter/DL/output1.txt'
-                a1 = cut_word(adree, reply)
-                a1.write()
-                print("已获得姿态分析")
-            except Exception as e:
-                print(f"出错了: {e}")
+        print("姿态分析")
+        txt_input = open('output.txt', 'r', encoding='utf-8').read()
+        print("读取到的文本内容为:", txt_input)
+        try:
+            reply = assistant.chat(txt_input)
+            print(f"AI: {reply}")
+            #写入txt
+            adree = 'output1.txt'
+            assistant.write(adree, reply)
+            print("已获得姿态分析")
+        except Exception as e:
+            print(f"出错了: {e}")
 
-
-        # 检查是否退出
-        else:
-            print("再见! 👋")
+        a1 = input("是否继续检测？(y/n)")
+        if a1 == 'n':
             break
+
 
 # 运行程序
 if __name__ == "__main__":
     main()
-
 
 
 
