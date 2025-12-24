@@ -12,7 +12,7 @@ class SimpleAPIAgent:
         # 使用你的API密钥直接初始化客户端
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
-            api_key='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'
+            api_key='输入密钥'
         )
 
     def chat(self, user_input: str) -> str:
@@ -73,6 +73,7 @@ def main():
 # 运行程序
 if __name__ == "__main__":
     main()
+
 
 
 
