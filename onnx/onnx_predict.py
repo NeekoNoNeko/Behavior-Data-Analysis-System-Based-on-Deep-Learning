@@ -11,7 +11,7 @@ import onnxruntime as ort
 
 # ========= 路径 =========
 POSE_ONNX = 'pose.onnx'
-CLS_ONNX  = 'cls.onnx'
+CLS_ONNX  = r'C:\workspace\Behavior-Data-Analysis-System-Based-on-Deep-Learning\ResNet\resnet50_finetune_single.onnx'
 INPUT_DIR = 'test'
 TMP_DIR   = './tmp'
 os.makedirs(TMP_DIR, exist_ok=True)

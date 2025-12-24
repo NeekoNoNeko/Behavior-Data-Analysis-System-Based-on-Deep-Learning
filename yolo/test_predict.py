@@ -10,7 +10,7 @@ import numpy as np
 from ultralytics import YOLO
 
 # ========= 1. 用户需要修改的 4 个路径 =========
-POSE_MODEL = 'yolo11n-pose.pt'          # YOLO-Pose 权重
+POSE_MODEL = 'yolov5s6-pose.pt'          # YOLO-Pose 权重
 CLS_MODEL  = r'runs/cls/skeletons/weights/best.pt'  # YOLO-CLS 权重
 INPUT_DIR  = 'test'          # 待处理图片文件夹
 TMP_DIR    = './tmp'         # 临时保存目录
