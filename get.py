@@ -31,7 +31,7 @@ def pos_get(video):
         label = infer(frame)
         #坐姿持续时间
         if label != sit_pos[-1]:
-            sit_time.append(label + ':' + str(second_count) + '秒')
+            sit_time.append(sit_pos[-1] + ':' + str(second_count) + '秒')
             sit_pos[-1] = label
             second_count = 0
             print('切换到' + label)
@@ -52,9 +52,10 @@ def pos_get(video):
     cap.release()
     cv2.destroyAllWindows()
     print(sit_time)
-    with open('D:/programm/Jupyter/DL/output.txt', 'w', encoding='utf-8') as file:
+    with open('output.txt', 'w', encoding='utf-8') as file:
         file.write(str(sit_time))
 
 
     return sit_time
 
+pos_get('test.mp4')
